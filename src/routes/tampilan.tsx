@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Zap, AlertTriangle, Receipt } from "lucide-react";
+import { Zap, AlertTriangle, Receipt, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/tampilan")({
   component: DisplayBoard,
@@ -72,6 +72,9 @@ function DisplayBoard() {
     <div className="min-h-screen bg-slate-900 text-white p-8 flex flex-col">
       <header className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
+          <Link to="/" className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition border border-slate-700 mr-2" title="Kembali ke Beranda">
+            <ArrowLeft className="h-5 w-5 text-slate-300" />
+          </Link>
           <div className="h-14 w-14 rounded-xl bg-yellow-400 text-slate-900 grid place-items-center font-black text-xl">
             PLN
           </div>
