@@ -29,6 +29,12 @@ function TicketPage() {
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [serving, setServing] = useState<Ticket | null>(null);
   const [ahead, setAhead] = useState<number>(0);
+  const [qrUrl, setQrUrl] = useState<string>("");
+
+  useEffect(() => {
+    // Only access window on the client side
+    setQrUrl(window.location.origin + `/tiket/${id}`);
+  }, [id]);
 
   useEffect(() => {
     let cancelled = false;
@@ -127,16 +133,18 @@ function TicketPage() {
           </p>
           <p className="mt-2 text-sm">a.n. {ticket.customer_name}</p>
           
-          <div className="mt-6 flex justify-center">
-            <div className="bg-white p-3 rounded-lg shadow-inner">
-              <QRCodeSVG
-                value={window.location.href}
-                size={140}
-                level={"H"}
-                includeMargin={false}
-              />
+          {qrUrl && (
+            <div className="mt-6 flex justify-center">
+              <div className="bg-white p-3 rounded-lg shadow-inner">
+                <QRCodeSVG
+                  value={qrUrl}
+                  size={140}
+                  level={"H"}
+                  includeMargin={false}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {isMe && (
             <p className="mt-4 text-lg font-bold">🔔 Silakan menuju loket!</p>
