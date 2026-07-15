@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Users } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 export const Route = createFileRoute("/tiket/$id")({
   component: TicketPage,
@@ -125,6 +126,18 @@ function TicketPage() {
             {ticket.code}
           </p>
           <p className="mt-2 text-sm">a.n. {ticket.customer_name}</p>
+          
+          <div className="mt-6 flex justify-center">
+            <div className="bg-white p-3 rounded-lg shadow-inner">
+              <QRCodeSVG
+                value={window.location.href}
+                size={140}
+                level={"H"}
+                includeMargin={false}
+              />
+            </div>
+          </div>
+
           {isMe && (
             <p className="mt-4 text-lg font-bold">🔔 Silakan menuju loket!</p>
           )}
